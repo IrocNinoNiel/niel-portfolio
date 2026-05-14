@@ -3,13 +3,15 @@ const projects = [
     title: 'Centralized Accounting System',
     description:
       'Enterprise web application for managing company-wide financial operations including general ledger, journal entries, accounts payable/receivable, budgeting, and automated financial reporting across multiple departments.',
+    outcome: 'Handles GL, AP/AR, and budgeting across 5+ departments for an enterprise financial services client.',
     tech: ['Laravel', 'Vue.js', 'MySQL'],
     role: 'Full Stack Developer',
   },
   {
     title: 'Patient Tracking System',
     description:
-      'Healthcare management platform for monitoring patient records, appointments, medical history, and treatment progress — enabling healthcare providers to deliver efficient, coordinated care.',
+      'Healthcare management platform for monitoring patient records, appointments, medical history, and treatment progress - enabling healthcare providers to deliver efficient, coordinated care.',
+    outcome: 'Manages patient records, appointments, and treatment history for clinical staff coordinating day-to-day care.',
     tech: ['React', 'Node.js / Express', 'MySQL'],
     role: 'Full Stack Developer',
   },
@@ -17,6 +19,7 @@ const projects = [
     title: 'Lending System',
     description:
       'Financial platform automating the end-to-end loan lifecycle including application intake, credit evaluation, loan disbursement, amortization scheduling, and collections management.',
+    outcome: 'Automates the full loan lifecycle - from application intake to collections - for a financial services client.',
     tech: ['Laravel', 'Vue.js', 'MySQL'],
     role: 'Full Stack Developer',
   },
@@ -39,8 +42,11 @@ export default function Projects() {
               <h3 className="font-semibold text-slate-900 dark:text-white mb-3 leading-snug">
                 {project.title}
               </h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400 mb-5 leading-relaxed flex-1">
+              <p className="text-sm text-slate-600 dark:text-slate-400 mb-3 leading-relaxed flex-1">
                 {project.description}
+              </p>
+              <p className="text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-100 dark:border-indigo-900 rounded-lg px-3 py-2 mb-4 leading-relaxed">
+                {project.outcome}
               </p>
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {project.tech.map(t => (

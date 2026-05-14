@@ -18,7 +18,10 @@ export default function Skills() {
     <section id="skills" className="py-24 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-5xl mx-auto px-6">
         <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3">Skills</h2>
-        <p className="text-slate-500 dark:text-slate-400 mb-12">Technologies I work with daily.</p>
+        <p className="text-slate-500 dark:text-slate-400 mb-12">
+          4 years of production experience across the full web stack - frontend frameworks, backend
+          APIs, and relational databases. Comfortable owning a feature end-to-end.
+        </p>
         <div className="grid md:grid-cols-3 gap-10">
           {skillGroups.map(({ category, skills }) => (
             <div key={category}>

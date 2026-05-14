@@ -15,19 +15,23 @@ export default function Experience() {
             <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
               <li className="flex gap-2">
                 <span className="text-indigo-400 mt-0.5 shrink-0">&#8212;</span>
-                Developed and maintained full-stack web applications for enterprise clients in finance, healthcare, and financial services.
+                Built and shipped 3 enterprise web applications - accounting, lending, and patient
+                tracking - from design to production using React, Vue.js, Laravel, and Node.js.
               </li>
               <li className="flex gap-2">
                 <span className="text-indigo-400 mt-0.5 shrink-0">&#8212;</span>
-                Built and integrated RESTful APIs using Laravel, Node.js/Express, and Spring Boot.
+                Designed and integrated RESTful APIs consumed across multiple internal departments,
+                supporting financial workflows for accounting and loan lifecycle management.
               </li>
               <li className="flex gap-2">
                 <span className="text-indigo-400 mt-0.5 shrink-0">&#8212;</span>
-                Created responsive front-end interfaces with React.js and Vue.js.
+                Developed responsive UIs in React.js and Vue.js that replaced manual data entry
+                workflows for end users in finance and healthcare operations.
               </li>
               <li className="flex gap-2">
                 <span className="text-indigo-400 mt-0.5 shrink-0">&#8212;</span>
-                Collaborated with cross-functional teams to deliver scalable solutions on schedule.
+                Worked directly with project managers and QA teams in an agile sprint workflow,
+                consistently delivering modules on schedule across a 4-year client engagement.
               </li>
             </ul>
           </div>

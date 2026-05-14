@@ -4,14 +4,15 @@ import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 
 const navLinks = [
+  { href: '#about', label: 'About' },
   { href: '#skills', label: 'Skills' },
   { href: '#projects', label: 'Projects' },
   { href: '#experience', label: 'Experience' },
-  { href: '#education', label: 'Education' },
+  { href: '#faq', label: 'FAQ' },
   { href: '#contact', label: 'Contact' },
 ]
 
-const sectionIds = ['hero', 'skills', 'projects', 'experience', 'education', 'contact']
+const sectionIds = ['hero', 'about', 'skills', 'projects', 'experience', 'education', 'faq', 'contact']
 
 function SunIcon() {
   return (

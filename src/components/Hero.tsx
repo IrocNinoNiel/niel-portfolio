@@ -18,7 +18,10 @@ export default function Hero() {
               Full Stack Developer
             </h2>
             <p className="text-base text-slate-600 dark:text-slate-400 max-w-xl mb-10 leading-relaxed mx-auto md:mx-0">
-              4 years of experience building robust web applications across finance, healthcare, and financial services — using React, Vue.js, Laravel, Node.js, and Spring Boot.
+              Full Stack Developer based in the Philippines, open to remote work. I build
+              production-grade web systems for finance and healthcare clients - from database schema
+              to deployed UI. 4 years at Syntactics Inc. shipping enterprise software used daily by
+              real teams.
             </p>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
               <a

@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx prisma migrate dev:*)",
+      "Bash(npx prisma generate:*)",
+      "Bash(npx tsc:*)",
+      "Bash(Get-ChildItem -Path \"E:\\\\Source\\\\nodej\\\\financial-assistance-app\" -Directory)",
+      "Bash(Select-Object Name)",
+      "Bash(gh label *)",
+      "PowerShell(gh label *)",
+      "PowerShell($env:GITHUB_TOKEN; $env:GH_TOKEN)",
+      "Bash(gh issue *)",
+      "PowerShell(curl *)",
+      "Skill(update-config)"
+    ]
+  }
+}

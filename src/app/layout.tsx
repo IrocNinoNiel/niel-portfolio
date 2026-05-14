@@ -9,9 +9,26 @@ const geist = Geist({
 })
 
 export const metadata: Metadata = {
-  title: 'Niño Niel Iroc — Full Stack Developer',
+  metadataBase: new URL(
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'
+  ),
+  title: 'Niño Niel Iroc - Full Stack Developer | Philippines | Remote',
   description:
-    'Full Stack Developer with 4 years of experience building web applications using React, Vue.js, Laravel, Node.js, and Spring Boot.',
+    'Full Stack Developer based in the Philippines with 4 years of experience building enterprise web applications for finance and healthcare clients. React, Vue.js, Laravel, Node.js, Spring Boot. Open to remote work.',
+  openGraph: {
+    title: 'Niño Niel Iroc - Full Stack Developer',
+    description:
+      'Full Stack Developer based in the Philippines. 4 years building enterprise web systems for finance and healthcare. Open to remote work.',
+    type: 'website',
+    images: [{ url: '/profile.jpg', width: 400, height: 400, alt: 'Niño Niel Iroc' }],
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Niño Niel Iroc - Full Stack Developer',
+    description:
+      'Full Stack Developer based in the Philippines. 4 years building enterprise web systems for finance and healthcare. Open to remote work.',
+    images: ['/profile.jpg'],
+  },
 }
 
 export default function RootLayout({
@@ -22,6 +39,31 @@ export default function RootLayout({
   return (
     <html lang="en" className={geist.variable} suppressHydrationWarning>
       <body className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: 'Niño Niel Iroc',
+              jobTitle: 'Full Stack Developer',
+              worksFor: { '@type': 'Organization', name: 'Syntactics Inc.' },
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Cagayan de Oro',
+                addressCountry: 'PH',
+              },
+              sameAs: [
+                'https://www.linkedin.com/in/ni%C3%B1o-niel-iroc-446823250/',
+                'https://github.com/IrocNinoNiel',
+              ],
+              knowsAbout: [
+                'React.js', 'Vue.js', 'Laravel', 'Node.js', 'Spring Boot',
+                'TypeScript', 'MySQL', 'PostgreSQL', 'Docker',
+              ],
+            }),
+          }}
+        />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
