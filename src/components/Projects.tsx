@@ -1,0 +1,64 @@
+const projects = [
+  {
+    title: 'Centralized Accounting System',
+    description:
+      'Enterprise web application for managing company-wide financial operations including general ledger, journal entries, accounts payable/receivable, budgeting, and automated financial reporting across multiple departments.',
+    tech: ['Laravel', 'Vue.js', 'MySQL'],
+    role: 'Full Stack Developer',
+  },
+  {
+    title: 'Patient Tracking System',
+    description:
+      'Healthcare management platform for monitoring patient records, appointments, medical history, and treatment progress — enabling healthcare providers to deliver efficient, coordinated care.',
+    tech: ['React', 'Node.js / Express', 'MySQL'],
+    role: 'Full Stack Developer',
+  },
+  {
+    title: 'Lending System',
+    description:
+      'Financial platform automating the end-to-end loan lifecycle including application intake, credit evaluation, loan disbursement, amortization scheduling, and collections management.',
+    tech: ['Laravel', 'Vue.js', 'MySQL'],
+    role: 'Full Stack Developer',
+  },
+]
+
+export default function Projects() {
+  return (
+    <section id="projects" className="py-24 bg-white dark:bg-slate-950">
+      <div className="max-w-5xl mx-auto px-6">
+        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3">Projects</h2>
+        <p className="text-slate-500 dark:text-slate-400 mb-12">
+          A selection of work built at Syntactics Inc.
+        </p>
+        <div className="grid md:grid-cols-3 gap-6">
+          {projects.map(project => (
+            <div
+              key={project.title}
+              className="flex flex-col p-6 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-900 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors"
+            >
+              <h3 className="font-semibold text-slate-900 dark:text-white mb-3 leading-snug">
+                {project.title}
+              </h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mb-5 leading-relaxed flex-1">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {project.tech.map(t => (
+                  <span
+                    key={t}
+                    className="px-2 py-0.5 text-xs bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-900 rounded font-medium"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <p className="text-xs text-slate-400 dark:text-slate-600 font-medium uppercase tracking-wide">
+                {project.role}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
