@@ -11,6 +11,10 @@ const skillGroups = [
     category: 'Tools & Databases',
     skills: ['MySQL', 'PostgreSQL', 'REST APIs', 'Git', 'Docker'],
   },
+  {
+    category: 'AI & Integrations',
+    skills: ['Gemini API', 'Vercel AI SDK', 'RAG', 'Upstash Vector'],
+  },
 ]
 
 export default function Skills() {

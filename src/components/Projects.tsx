@@ -1,5 +1,15 @@
 const projects = [
   {
+    title: 'LedgerAI',
+    description:
+      'RAG-powered financial document Q&A tool. Upload any financial PDF and ask questions in plain English. Pre-loaded with Apple\'s 2023 10-K for a live demo.',
+    outcome: 'Answers grounded in document content via retrieval-augmented generation using Gemini embeddings and Upstash Vector.',
+    tech: ['Next.js', 'Gemini API', 'Upstash Vector', 'Vercel AI SDK'],
+    role: 'Full Stack Developer',
+    demoUrl: 'https://ledgerai.vercel.app',
+    githubUrl: 'https://github.com/IrocNinoNiel/ledgerai',
+  },
+  {
     title: 'Centralized Accounting System',
     description:
       'Enterprise web application for managing company-wide financial operations including general ledger, journal entries, accounts payable/receivable, budgeting, and automated financial reporting across multiple departments.',
@@ -58,9 +68,31 @@ export default function Projects() {
                   </span>
                 ))}
               </div>
-              <p className="text-xs text-slate-400 dark:text-slate-600 font-medium uppercase tracking-wide">
-                {project.role}
-              </p>
+              <div className="flex items-center justify-between">
+                <p className="text-xs text-slate-400 dark:text-slate-600 font-medium uppercase tracking-wide">
+                  {project.role}
+                </p>
+                {'demoUrl' in project && (
+                  <div className="flex gap-3">
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
+                    >
+                      Live demo
+                    </a>
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-medium text-slate-500 dark:text-slate-400 hover:underline"
+                    >
+                      GitHub
+                    </a>
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>

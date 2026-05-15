@@ -68,7 +68,8 @@ A working API route that accepts a PDF, parses it, chunks it, embeds it, and sto
   ```typescript
   { id: `chunk-${i}`, vector: embedding, metadata: { text: chunk } }
   ```
-- [ ] Pre-ingest `sample.pdf` at startup or on first request (so it is ready without upload)
+- [x] Pre-ingest `sample.pdf` at startup or on first request (so it is ready without upload)
+  - Added `GET /api/ingest/sample` with Redis flag guard — run once after first deploy via `curl <url>/api/ingest/sample`
 - [ ] Test the route with a `curl` POST using the sample PDF
 - [ ] Confirm vectors appear in the Upstash Vector dashboard
 
@@ -112,37 +113,38 @@ Full split-layout UI that looks polished and works end-to-end.
 ### Tasks
 
 **Layout**
-- [ ] Build `src/app/page.tsx` as a full-height split layout
+- [x] Build `src/app/page.tsx` as a full-height split layout
   - Left panel: 40% width on desktop, full width on mobile (stacked)
   - Right panel: 60% width on desktop
   - Dark mode support using existing Tailwind dark: classes
+  - Note: uses a custom streaming hook (native fetch + ReadableStream) instead of useChat — AI SDK v6 removed the useChat hook
 
 **Left Panel - `src/components/PDFPanel.tsx`**
-- [ ] Show sample document name and description ("Apple Inc. 2023 Annual Report")
-- [ ] "Using sample document" badge shown by default
-- [ ] PDF upload zone - drag and drop or click to select
-- [ ] File validation feedback (size error, success state)
-- [ ] Show uploaded file name when a custom PDF is loaded
-- [ ] Suggested question chips (5 pre-written questions from architecture.md)
+- [x] Show sample document name and description ("Apple Inc. 2023 Annual Report")
+- [x] "Using sample document" badge shown by default
+- [x] PDF upload zone - drag and drop or click to select
+- [x] File validation feedback (size error, success state)
+- [x] Show uploaded file name when a custom PDF is loaded
+- [x] Suggested question chips (5 pre-written questions from architecture.md)
   - Clicking a chip sends the question directly to the chat
 
 **Right Panel - `src/components/ChatPanel.tsx`**
-- [ ] Message thread - alternating user and AI message bubbles
-- [ ] Streaming text renders word-by-word using `useChat` hook
-- [ ] Loading indicator while waiting for first token
-- [ ] Input box fixed to bottom of panel with send button
-- [ ] Empty state: "Ask anything about the loaded financial document"
-- [ ] Auto-scroll to latest message
+- [x] Message thread - alternating user and AI message bubbles
+- [x] Streaming text renders word-by-word via native ReadableStream reader
+- [x] Loading indicator while waiting for first token
+- [x] Input box fixed to bottom of panel with send button
+- [x] Empty state: "Ask anything about the loaded financial document"
+- [x] Auto-scroll to latest message
 
 **Rate Limit - `src/components/RateLimitBanner.tsx`**
-- [ ] Full-width banner shown when daily limit is reached
-- [ ] Text: "Demo limit reached for today. Come back tomorrow or clone the repo and use your own API key."
-- [ ] Link to GitHub repo
+- [x] Full-width banner shown when daily limit is reached
+- [x] Text: "Demo limit reached for today. Come back tomorrow or clone the repo and use your own API key."
+- [x] Link to GitHub repo
 
 **Polish**
-- [ ] Match the indigo + slate color scheme from the portfolio site
-- [ ] Ensure mobile layout works (panels stack vertically)
-- [ ] Add page title and meta description in `layout.tsx`
+- [x] Match the indigo + slate color scheme from the portfolio site
+- [x] Ensure mobile layout works (panels stack vertically)
+- [x] Add page title and meta description in `layout.tsx`
 
 ---
 
