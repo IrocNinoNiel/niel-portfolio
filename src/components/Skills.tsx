@@ -5,15 +5,19 @@ import { useEffect, useRef, useState } from 'react'
 const skillGroups = [
   {
     category: 'Frontend',
-    skills: ['React.js', 'Vue.js', 'TypeScript', 'HTML / CSS', 'Tailwind CSS'],
+    skills: ['React.js', 'Vue.js', 'TypeScript', 'Tailwind CSS', 'HTML / CSS'],
   },
   {
     category: 'Backend',
-    skills: ['Laravel (PHP)', 'Node.js / Express', 'Spring Boot (Java)'],
+    skills: ['Laravel (PHP)', 'Node.js / Express', 'Spring Boot (Java)', 'REST APIs', 'Postman', 'Swagger / OpenAPI'],
   },
   {
-    category: 'Tools & Databases',
-    skills: ['MySQL', 'PostgreSQL', 'REST APIs', 'Git', 'Docker'],
+    category: 'Databases',
+    skills: ['MySQL', 'PostgreSQL', 'Amazon Neptune'],
+  },
+  {
+    category: 'DevOps & Deployment',
+    skills: ['Docker', 'Git', 'GitHub', 'GitLab', 'Bitbucket', 'Vercel'],
   },
   {
     category: 'AI & Integrations',
