@@ -2,7 +2,7 @@
 
 Personal portfolio site built with Next.js 16, React 19, and Tailwind CSS v4. Single-page layout with dark mode, scroll-triggered fade animations, and active section highlighting in the navbar.
 
-**Live site:** https://niel-portfolio.vercel.app
+**Live site:** https://niel-portfolio-apgy.vercel.app
 
 ---
 

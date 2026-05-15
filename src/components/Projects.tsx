@@ -6,7 +6,7 @@ const projects = [
     outcome: 'Answers grounded in document content via retrieval-augmented generation using Gemini embeddings and Upstash Vector.',
     tech: ['Next.js', 'Gemini API', 'Upstash Vector', 'Vercel AI SDK'],
     role: 'Full Stack Developer',
-    demoUrl: 'https://ledgerai.vercel.app',
+    demoUrl: 'https://ledgerai-rho.vercel.app',
     githubUrl: 'https://github.com/IrocNinoNiel/ledgerai',
   },
   {
