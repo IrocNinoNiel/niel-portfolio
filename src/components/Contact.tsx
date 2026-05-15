@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import FadeIn from './FadeIn'
 
 function EnvelopeIcon() {
@@ -28,13 +31,26 @@ function GitHubIcon() {
   )
 }
 
+function CopyIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+    </svg>
+  )
+}
+
+function CheckIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  )
+}
+
+const EMAIL = 'iroc.niel123@gmail.com'
+
 const links = [
-  {
-    icon: <EnvelopeIcon />,
-    label: 'Email',
-    value: 'iroc.niel123@gmail.com',
-    href: 'mailto:iroc.niel123@gmail.com',
-  },
   {
     icon: <LinkedInIcon />,
     label: 'LinkedIn',
@@ -50,6 +66,16 @@ const links = [
 ]
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false)
+
+  function copyEmail(e: React.MouseEvent) {
+    e.preventDefault()
+    navigator.clipboard.writeText(EMAIL).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }
+
   return (
     <section id="contact" className="py-24 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-5xl mx-auto px-6 text-center">
@@ -62,12 +88,44 @@ export default function Contact() {
           </p>
         </FadeIn>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto w-full">
+          {/* Email card */}
+          <FadeIn delay={0} className="h-full">
+            <a
+              href={`mailto:${EMAIL}`}
+              className="flex items-center gap-4 px-5 py-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:border-indigo-400 dark:hover:border-indigo-500 hover:shadow-md transition-all group text-left w-full h-full"
+            >
+              <span className="text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform shrink-0">
+                <EnvelopeIcon />
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs text-slate-400 dark:text-slate-500 font-medium uppercase tracking-wide mb-0.5">
+                  Email
+                </p>
+                <p className="text-sm text-slate-700 dark:text-slate-300 font-medium leading-tight truncate">
+                  {EMAIL}
+                </p>
+              </div>
+              <button
+                onClick={copyEmail}
+                aria-label="Copy email address"
+                className={`shrink-0 p-1.5 rounded-lg transition-colors ${
+                  copied
+                    ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30'
+                    : 'text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                {copied ? <CheckIcon /> : <CopyIcon />}
+              </button>
+            </a>
+          </FadeIn>
+
+          {/* LinkedIn + GitHub */}
           {links.map(({ icon, label, value, href }, i) => (
-            <FadeIn key={label} delay={i * 100} className="h-full">
+            <FadeIn key={label} delay={(i + 1) * 100} className="h-full">
               <a
                 href={href}
-                target={href.startsWith('mailto') ? undefined : '_blank'}
-                rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-4 px-5 py-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:border-indigo-400 dark:hover:border-indigo-500 hover:shadow-md transition-all group text-left w-full h-full"
               >
                 <span className="text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform shrink-0">
