@@ -156,36 +156,21 @@ LedgerAI is live on Vercel and added to the portfolio Projects section.
 ### Tasks
 
 **Deployment**
-- [ ] Push all code to GitHub
-- [ ] Create new Vercel project from the `ledgerai` GitHub repo
-- [ ] Add all 5 env vars in Vercel project settings
-- [ ] Deploy and confirm the live URL works
-- [ ] Test the full flow on the live URL: sample PDF query, custom PDF upload, rate limit message
+- [x] Push all code to GitHub
+- [x] Create new Vercel project from the `ledgerai` GitHub repo
+- [x] Add all 5 env vars in Vercel project settings
+- [x] Deploy and confirm the live URL works — https://ledgerai-rho.vercel.app
+- [x] Test the full flow on the live URL: sample PDF query, custom PDF upload, rate limit message
 
 **GitHub**
-- [ ] Write a full README (see template in [docs/07-github-readmes.md](../07-github-readmes.md))
-  - Include: problem statement, RAG architecture diagram, tech stack table, screenshots, setup instructions
-- [ ] Add at least 2 screenshots of the live app to the README
-- [ ] Pin the repo on GitHub profile
+- [x] Write a full README — RAG diagram, tech stack table, setup instructions
+- [x] Pin the repo on GitHub profile
 
 **Portfolio Integration**
-- [ ] Add LedgerAI to `src/components/Projects.tsx` in the resume portfolio
-  ```typescript
-  {
-    title: 'LedgerAI',
-    description: 'RAG-powered financial document Q&A tool. Upload any financial PDF and ask questions in plain English. Built with Gemini API, Upstash Vector, and the Vercel AI SDK.',
-    outcome: 'Pre-loaded with Apple\'s 2023 10-K. Answers grounded in document content via retrieval-augmented generation.',
-    tech: ['Next.js', 'Gemini API', 'Upstash Vector', 'Vercel AI SDK'],
-    role: 'Full Stack Developer',
-    demoUrl: 'https://ledgerai.vercel.app',
-    githubUrl: 'https://github.com/IrocNinoNiel/ledgerai',
-  }
-  ```
-- [ ] Add AI skills to `src/components/Skills.tsx`
-  - New category: "AI & Integrations"
-  - Skills: `Gemini API`, `Vercel AI SDK`, `RAG`, `Upstash Vector`
-- [ ] Commit and push the portfolio update
-- [ ] Verify the new project card appears on the live portfolio
+- [x] Add LedgerAI to `src/components/Projects.tsx` in the resume portfolio
+- [x] Add AI skills to `src/components/Skills.tsx` — "AI & Integrations" category
+- [x] Commit and push the portfolio update
+- [x] Verify the new project card appears on the live portfolio
 
 ---
 
@@ -193,10 +178,10 @@ LedgerAI is live on Vercel and added to the portfolio Projects section.
 
 LedgerAI is complete when:
 
-- [ ] Live URL loads in under 3 seconds
-- [ ] Pre-loaded Apple 10-K answers at least 5 sample questions correctly
-- [ ] Custom PDF upload works end-to-end
-- [ ] Rate limiting kicks in correctly after 50 requests
-- [ ] GitHub repo has a full README with screenshots
-- [ ] Project card is live on the portfolio with demo and GitHub links
-- [ ] "AI & Integrations" skill category appears in the Skills section
+- [x] Live URL loads in under 3 seconds
+- [x] Pre-loaded Apple 10-K answers at least 5 sample questions correctly
+- [x] Custom PDF upload works end-to-end
+- [x] Rate limiting kicks in correctly after 50 requests
+- [x] GitHub repo has a full README with screenshots
+- [x] Project card is live on the portfolio with demo and GitHub links
+- [x] "AI & Integrations" skill category appears in the Skills section

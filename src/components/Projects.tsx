@@ -1,4 +1,19 @@
-const projects = [
+'use client'
+
+import { useState } from 'react'
+
+interface Project {
+  title: string
+  description: string
+  outcome: string
+  tech: string[]
+  role: string
+  demoUrl?: string
+  githubUrl?: string
+  caseStudy?: string
+}
+
+const projects: Project[] = [
   {
     title: 'LedgerAI',
     description:
@@ -8,6 +23,25 @@ const projects = [
     role: 'Full Stack Developer',
     demoUrl: 'https://ledgerai-rho.vercel.app',
     githubUrl: 'https://github.com/IrocNinoNiel/ledgerai',
+  },
+  {
+    title: 'Equipment Tracking Module',
+    description:
+      'Equipment categories required unlimited depth — but recursive MySQL 8 CTE queries degraded past 8 levels. I identified the bottleneck, researched alternatives, and drove the switch to Amazon Neptune, rebuilding the category layer as a graph on an existing AWS serverless platform.',
+    outcome: 'Traversals across 8+ levels now return in milliseconds with leaner graph queries — replacing recursive CTEs that slowed significantly at depth.',
+    tech: ['Node.js', 'Amazon Neptune', 'AWS', 'Serverless'],
+    role: 'Full Stack Developer',
+    caseStudy: `**Problem**
+An asset management platform needed hierarchical equipment categories — type → sub-type → model → variant — going arbitrarily deep. The initial implementation used MySQL 8 recursive CTEs to traverse the tree. Performance was acceptable at shallow depths but degraded noticeably past 8 levels, creating slow category lookups as the dataset grew.
+
+**Approach**
+I identified the CTE queries as the bottleneck and researched alternatives for hierarchical data at depth. Since the project was already on AWS, Amazon Neptune was the natural fit — a managed graph database purpose-built for relationship traversal. I proposed the switch, designed the graph schema, and migrated the category layer from MySQL to Neptune using Gremlin traversals.
+
+**Key Challenge**
+Translating a relational category table (parent_id foreign keys) into a graph of nodes and edges, while keeping the existing API contract unchanged so the rest of the system required no rewrites.
+
+**Outcome**
+Traversals across 8+ levels now return in milliseconds. Query code became significantly leaner — recursive CTEs replaced by simple graph traversals. The category tree can now grow to arbitrary depth without performance degradation.`,
   },
   {
     title: 'Centralized Accounting System',
@@ -35,7 +69,36 @@ const projects = [
   },
 ]
 
+function CaseStudyContent({ text }: { text: string }) {
+  return (
+    <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 flex flex-col gap-3">
+      {text.split('\n\n').map((block, i) => {
+        const boldMatch = block.match(/^\*\*(.+?)\*\*\n([\s\S]+)/)
+        if (boldMatch) {
+          return (
+            <div key={i}>
+              <p className="text-xs font-semibold text-slate-900 dark:text-slate-100 mb-1">
+                {boldMatch[1]}
+              </p>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                {boldMatch[2]}
+              </p>
+            </div>
+          )
+        }
+        return (
+          <p key={i} className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            {block}
+          </p>
+        )
+      })}
+    </div>
+  )
+}
+
 export default function Projects() {
+  const [expanded, setExpanded] = useState<string | null>(null)
+
   return (
     <section id="projects" className="py-24 bg-white dark:bg-slate-950">
       <div className="max-w-5xl mx-auto px-6">
@@ -68,12 +131,13 @@ export default function Projects() {
                   </span>
                 ))}
               </div>
+
               <div className="flex items-center justify-between">
                 <p className="text-xs text-slate-400 dark:text-slate-600 font-medium uppercase tracking-wide">
                   {project.role}
                 </p>
-                {'demoUrl' in project && (
-                  <div className="flex gap-3">
+                <div className="flex gap-3 items-center">
+                  {project.demoUrl && (
                     <a
                       href={project.demoUrl}
                       target="_blank"
@@ -82,6 +146,8 @@ export default function Projects() {
                     >
                       Live demo
                     </a>
+                  )}
+                  {project.githubUrl && (
                     <a
                       href={project.githubUrl}
                       target="_blank"
@@ -90,9 +156,23 @@ export default function Projects() {
                     >
                       GitHub
                     </a>
-                  </div>
-                )}
+                  )}
+                  {project.caseStudy && (
+                    <button
+                      onClick={() =>
+                        setExpanded(expanded === project.title ? null : project.title)
+                      }
+                      className="text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
+                    >
+                      {expanded === project.title ? 'Close ↑' : 'Case study ↓'}
+                    </button>
+                  )}
+                </div>
               </div>
+
+              {expanded === project.title && project.caseStudy && (
+                <CaseStudyContent text={project.caseStudy} />
+              )}
             </div>
           ))}
         </div>
