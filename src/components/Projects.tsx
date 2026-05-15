@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 
 interface Project {
   title: string
@@ -107,7 +108,7 @@ function CaseStudyModal({
 
   const sections = parseCaseStudy(project.caseStudy!)
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
       onClick={onClose}
@@ -178,7 +179,8 @@ function CaseStudyModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
