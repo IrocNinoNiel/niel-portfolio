@@ -93,11 +93,14 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className={`text-sm transition-colors ${
-                isActive(link.href)
-                  ? 'text-indigo-600 dark:text-indigo-400 font-semibold'
-                  : 'text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400'
-              }`}
+              className={`text-sm relative pb-0.5 transition-colors
+                after:absolute after:bottom-0 after:left-0 after:h-0.5 after:rounded-full
+                after:bg-indigo-600 dark:after:bg-indigo-400
+                after:transition-[width] after:duration-200
+                ${isActive(link.href)
+                  ? 'text-indigo-600 dark:text-indigo-400 font-semibold after:w-full'
+                  : 'text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 after:w-0 hover:after:w-full'
+                }`}
             >
               {link.label}
             </a>

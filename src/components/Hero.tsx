@@ -1,6 +1,32 @@
+'use client'
+
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
+
+const TITLE = 'Full Stack Developer'
 
 export default function Hero() {
+  const [displayTitle, setDisplayTitle] = useState('')
+  const [done, setDone] = useState(false)
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setDisplayTitle(TITLE)
+      setDone(true)
+      return
+    }
+    let i = 0
+    const timer = setInterval(() => {
+      i++
+      setDisplayTitle(TITLE.slice(0, i))
+      if (i >= TITLE.length) {
+        setDone(true)
+        clearInterval(timer)
+      }
+    }, 60)
+    return () => clearInterval(timer)
+  }, [])
+
   return (
     <section id="hero" className="min-h-screen flex items-center pt-16 bg-white dark:bg-slate-950">
       <div className="max-w-5xl mx-auto px-6 py-20 w-full">
@@ -14,8 +40,11 @@ export default function Hero() {
             <h1 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight leading-tight">
               Ni&ntilde;o Niel Iroc
             </h1>
-            <h2 className="text-xl md:text-2xl font-medium text-slate-400 dark:text-slate-500 mb-6">
-              Full Stack Developer
+            <h2 className="text-xl md:text-2xl font-medium text-slate-400 dark:text-slate-500 mb-6 min-h-[2rem]">
+              {displayTitle}
+              {!done && (
+                <span className="inline-block w-0.5 h-5 bg-indigo-500 dark:bg-indigo-400 ml-0.5 align-middle animate-pulse" />
+              )}
             </h2>
             <p className="text-base text-slate-600 dark:text-slate-400 max-w-xl mb-10 leading-relaxed mx-auto md:mx-0">
               Full Stack Developer based in the Philippines, open to remote work. I build
@@ -26,14 +55,14 @@ export default function Hero() {
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
               <a
                 href="#projects"
-                className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium transition-colors"
+                className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white rounded-lg font-medium transition-all duration-150"
               >
                 View Projects
               </a>
               <a
                 href="/resume.pdf"
                 download
-                className="px-6 py-3 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 dark:hover:border-indigo-600 text-slate-900 dark:text-white rounded-lg font-medium transition-colors"
+                className="px-6 py-3 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 dark:hover:border-indigo-600 active:scale-95 text-slate-900 dark:text-white rounded-lg font-medium transition-all duration-150"
               >
                 Download CV
               </a>

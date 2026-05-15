@@ -198,7 +198,7 @@ export default function Projects() {
           {projects.map(project => (
             <div
               key={project.title}
-              className="flex flex-col p-6 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-900 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors"
+              className="flex flex-col p-6 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-900 hover:border-indigo-300 dark:hover:border-indigo-700 hover:-translate-y-1 hover:shadow-lg transition-all duration-200"
             >
               <h3 className="font-semibold text-slate-900 dark:text-white mb-3 leading-snug">
                 {project.title}

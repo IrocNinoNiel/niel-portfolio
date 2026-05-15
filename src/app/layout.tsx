@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Geist } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import ScrollProgress from '@/components/ScrollProgress'
 
 const geist = Geist({
   variable: '--font-geist-sans',
@@ -64,7 +65,10 @@ export default function RootLayout({
             }),
           }}
         />
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ScrollProgress />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
