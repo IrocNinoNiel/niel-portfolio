@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 interface Project {
   title: string
@@ -17,8 +17,9 @@ const projects: Project[] = [
   {
     title: 'LedgerAI',
     description:
-      'RAG-powered financial document Q&A tool. Upload any financial PDF and ask questions in plain English. Pre-loaded with Apple\'s 2023 10-K for a live demo.',
-    outcome: 'Answers grounded in document content via retrieval-augmented generation using Gemini embeddings and Upstash Vector.',
+      "RAG-powered financial document Q&A tool. Upload any financial PDF and ask questions in plain English. Pre-loaded with Apple's 2023 10-K for a live demo.",
+    outcome:
+      'Answers grounded in document content via retrieval-augmented generation using Gemini embeddings and Upstash Vector.',
     tech: ['Next.js', 'Gemini API', 'Upstash Vector', 'Vercel AI SDK'],
     role: 'Full Stack Developer',
     demoUrl: 'https://ledgerai-rho.vercel.app',
@@ -28,26 +29,28 @@ const projects: Project[] = [
     title: 'Equipment Tracking Module',
     description:
       'Equipment categories required unlimited depth — but recursive MySQL 8 CTE queries degraded past 8 levels. I identified the bottleneck, researched alternatives, and drove the switch to Amazon Neptune, rebuilding the category layer as a graph on an existing AWS serverless platform.',
-    outcome: 'Traversals across 8+ levels now return in milliseconds with leaner graph queries — replacing recursive CTEs that slowed significantly at depth.',
+    outcome:
+      'Traversals across 8+ levels now return in milliseconds with leaner graph queries — replacing recursive CTEs that slowed significantly at depth.',
     tech: ['Node.js', 'Amazon Neptune', 'AWS', 'Serverless'],
     role: 'Full Stack Developer',
-    caseStudy: `**Problem**
+    caseStudy: `Problem
 An asset management platform needed hierarchical equipment categories — type → sub-type → model → variant — going arbitrarily deep. The initial implementation used MySQL 8 recursive CTEs to traverse the tree. Performance was acceptable at shallow depths but degraded noticeably past 8 levels, creating slow category lookups as the dataset grew.
 
-**Approach**
+Approach
 I identified the CTE queries as the bottleneck and researched alternatives for hierarchical data at depth. Since the project was already on AWS, Amazon Neptune was the natural fit — a managed graph database purpose-built for relationship traversal. I proposed the switch, designed the graph schema, and migrated the category layer from MySQL to Neptune using Gremlin traversals.
 
-**Key Challenge**
+Key Challenge
 Translating a relational category table (parent_id foreign keys) into a graph of nodes and edges, while keeping the existing API contract unchanged so the rest of the system required no rewrites.
 
-**Outcome**
+Outcome
 Traversals across 8+ levels now return in milliseconds. Query code became significantly leaner — recursive CTEs replaced by simple graph traversals. The category tree can now grow to arbitrary depth without performance degradation.`,
   },
   {
     title: 'Centralized Accounting System',
     description:
       'Enterprise web application for managing company-wide financial operations including general ledger, journal entries, accounts payable/receivable, budgeting, and automated financial reporting across multiple departments.',
-    outcome: 'Handles GL, AP/AR, and budgeting across 5+ departments for an enterprise financial services client.',
+    outcome:
+      'Handles GL, AP/AR, and budgeting across 5+ departments for an enterprise financial services client.',
     tech: ['Laravel', 'Vue.js', 'MySQL'],
     role: 'Full Stack Developer',
   },
@@ -55,7 +58,8 @@ Traversals across 8+ levels now return in milliseconds. Query code became signif
     title: 'Patient Tracking System',
     description:
       'Healthcare management platform for monitoring patient records, appointments, medical history, and treatment progress - enabling healthcare providers to deliver efficient, coordinated care.',
-    outcome: 'Manages patient records, appointments, and treatment history for clinical staff coordinating day-to-day care.',
+    outcome:
+      'Manages patient records, appointments, and treatment history for clinical staff coordinating day-to-day care.',
     tech: ['React', 'Node.js / Express', 'MySQL'],
     role: 'Full Stack Developer',
   },
@@ -63,41 +67,123 @@ Traversals across 8+ levels now return in milliseconds. Query code became signif
     title: 'Lending System',
     description:
       'Financial platform automating the end-to-end loan lifecycle including application intake, credit evaluation, loan disbursement, amortization scheduling, and collections management.',
-    outcome: 'Automates the full loan lifecycle - from application intake to collections - for a financial services client.',
+    outcome:
+      'Automates the full loan lifecycle - from application intake to collections - for a financial services client.',
     tech: ['Laravel', 'Vue.js', 'MySQL'],
     role: 'Full Stack Developer',
   },
 ]
 
-function CaseStudyContent({ text }: { text: string }) {
+const SECTIONS = ['Problem', 'Approach', 'Key Challenge', 'Outcome']
+
+function parseCaseStudy(text: string) {
+  return SECTIONS.map(heading => {
+    const regex = new RegExp(`${heading}\\n([\\s\\S]*?)(?=${SECTIONS.map(s => `${s}\\n`).join('|')}|$)`)
+    const match = text.match(regex)
+    return { heading, body: match ? match[1].trim() : '' }
+  }).filter(s => s.body)
+}
+
+function CaseStudyModal({
+  project,
+  onClose,
+}: {
+  project: Project
+  onClose: () => void
+}) {
+  const handleKey = useCallback(
+    (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() },
+    [onClose]
+  )
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = ''
+    }
+  }, [handleKey])
+
+  const sections = parseCaseStudy(project.caseStudy!)
+
   return (
-    <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 flex flex-col gap-3">
-      {text.split('\n\n').map((block, i) => {
-        const boldMatch = block.match(/^\*\*(.+?)\*\*\n([\s\S]+)/)
-        if (boldMatch) {
-          return (
-            <div key={i}>
-              <p className="text-xs font-semibold text-slate-900 dark:text-slate-100 mb-1">
-                {boldMatch[1]}
-              </p>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                {boldMatch[2]}
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl bg-white dark:bg-slate-900 shadow-2xl"
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="sticky top-0 flex items-start justify-between gap-4 bg-white dark:bg-slate-900 px-8 pt-8 pb-4 border-b border-slate-100 dark:border-slate-800">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-1">
+              Case Study
+            </p>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white leading-snug">
+              {project.title}
+            </h3>
+          </div>
+          <button
+            onClick={onClose}
+            className="shrink-0 mt-1 rounded-lg p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:text-slate-200 dark:hover:bg-slate-800 transition-colors"
+            aria-label="Close"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="px-8 py-6 flex flex-col gap-6">
+          {sections.map(({ heading, body }) => (
+            <div key={heading}>
+              <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">
+                {heading}
+              </h4>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                {body}
               </p>
             </div>
-          )
-        }
-        return (
-          <p key={i} className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-            {block}
-          </p>
-        )
-      })}
+          ))}
+
+          {/* Tech stack */}
+          <div>
+            <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">
+              Tech Stack
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map(t => (
+                <span
+                  key={t}
+                  className="px-2.5 py-1 text-xs bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-900 rounded-full font-medium"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="px-8 pb-8">
+          <button
+            onClick={onClose}
+            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:border-indigo-400 dark:hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+          >
+            Close
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
 
 export default function Projects() {
-  const [expanded, setExpanded] = useState<string | null>(null)
+  const [activeCase, setActiveCase] = useState<Project | null>(null)
 
   return (
     <section id="projects" className="py-24 bg-white dark:bg-slate-950">
@@ -131,7 +217,6 @@ export default function Projects() {
                   </span>
                 ))}
               </div>
-
               <div className="flex items-center justify-between">
                 <p className="text-xs text-slate-400 dark:text-slate-600 font-medium uppercase tracking-wide">
                   {project.role}
@@ -159,24 +244,22 @@ export default function Projects() {
                   )}
                   {project.caseStudy && (
                     <button
-                      onClick={() =>
-                        setExpanded(expanded === project.title ? null : project.title)
-                      }
+                      onClick={() => setActiveCase(project)}
                       className="text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
                     >
-                      {expanded === project.title ? 'Close ↑' : 'Case study ↓'}
+                      Case study
                     </button>
                   )}
                 </div>
               </div>
-
-              {expanded === project.title && project.caseStudy && (
-                <CaseStudyContent text={project.caseStudy} />
-              )}
             </div>
           ))}
         </div>
       </div>
+
+      {activeCase && (
+        <CaseStudyModal project={activeCase} onClose={() => setActiveCase(null)} />
+      )}
     </section>
   )
 }
