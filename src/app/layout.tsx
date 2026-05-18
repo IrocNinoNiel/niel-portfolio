@@ -21,14 +21,15 @@ export const metadata: Metadata = {
     description:
       'Full Stack Developer based in the Philippines. 4 years building enterprise web systems for finance and healthcare. Open to remote work.',
     type: 'website',
-    images: [{ url: '/profile.jpg', width: 400, height: 400, alt: 'Niño Niel Iroc' }],
+    url: '/',
+    images: [{ url: '/api/og', width: 1200, height: 630, alt: 'Niño Niel Iroc - Full Stack Developer' }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Niño Niel Iroc - Full Stack Developer',
     description:
       'Full Stack Developer based in the Philippines. 4 years building enterprise web systems for finance and healthcare. Open to remote work.',
-    images: ['/profile.jpg'],
+    images: ['/api/og'],
   },
 }
 
