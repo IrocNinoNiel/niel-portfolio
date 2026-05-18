@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
-const TITLE = 'Full Stack Developer'
+const TITLE = 'Software Developer'
 
 export default function Hero() {
   const [displayTitle, setDisplayTitle] = useState('')
@@ -47,7 +47,7 @@ export default function Hero() {
               )}
             </h2>
             <p className="text-base text-slate-600 dark:text-slate-400 max-w-xl mb-10 leading-relaxed mx-auto md:mx-0">
-              Full Stack Developer based in the Philippines, open to remote work. I build
+              Software Developer based in the Philippines, open to remote work. I build
               production-grade web systems for finance and healthcare clients - from database schema
               to deployed UI. 4 years at Syntactics Inc. shipping enterprise software used daily by
               real teams.
