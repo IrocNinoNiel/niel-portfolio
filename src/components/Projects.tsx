@@ -65,6 +65,15 @@ Traversals across 8+ levels now return in milliseconds. Query code became signif
     role: 'Full Stack Developer',
   },
   {
+    title: 'WordPress Landing Pages',
+    description:
+      'Built and customized marketing landing pages independently using Elementor and the Gutenberg block editor, adding custom PHP/CSS and configuring plugins (SEO, Gravity Forms, and other supporting tools) to meet marketing and lead-generation needs.',
+    outcome:
+      'Delivered conversion-focused landing pages with custom code and configured SEO and form plugins to support marketing and lead-generation campaigns.',
+    tech: ['WordPress', 'Elementor', 'Gutenberg', 'Gravity Forms', 'PHP / CSS'],
+    role: 'WordPress Developer',
+  },
+  {
     title: 'Lending System',
     description:
       'Financial platform automating the end-to-end loan lifecycle including application intake, credit evaluation, loan disbursement, amortization scheduling, and collections management.',

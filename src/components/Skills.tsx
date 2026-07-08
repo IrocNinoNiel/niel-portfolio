@@ -20,8 +20,12 @@ const skillGroups = [
     skills: ['Docker', 'Git', 'GitHub', 'GitLab', 'Bitbucket', 'Vercel'],
   },
   {
+    category: 'WordPress & CMS',
+    skills: ['WordPress', 'Elementor', 'Gutenberg', 'Gravity Forms', 'SEO Plugins', 'Custom PHP / CSS'],
+  },
+  {
     category: 'AI & Integrations',
-    skills: ['Gemini API', 'Vercel AI SDK', 'RAG', 'Upstash Vector'],
+    skills: ['Claude Code', 'Gemini API', 'Vercel AI SDK', 'RAG', 'Upstash Vector'],
   },
 ]
 
@@ -51,7 +55,8 @@ export default function Skills() {
         <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3">Skills</h2>
         <p className="text-slate-500 dark:text-slate-400 mb-12">
           4 years of production experience across the full web stack - frontend frameworks, backend
-          APIs, and relational databases. Comfortable owning a feature end-to-end.
+          APIs, relational databases, and WordPress/CMS development. Comfortable owning a feature
+          end-to-end.
         </p>
         <div ref={ref} className="grid md:grid-cols-3 gap-10">
           {skillGroups.map(({ category, skills }) => (
